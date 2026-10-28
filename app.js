@@ -265,13 +265,21 @@ function setupAuthModal() {
   });
 }
 
+
 function openAuthModal(mode = "login") {
   authMode = mode;
 
   const modal = getElement("authModal");
-  if (!modal) return;
 
+  if (!modal) {
+    alert('Login window नहीं मिली। index.html में authModal ID जाँचें।');
+    console.error('Missing element: authModal');
+    return;
+  }
+
+  modal.classList.remove("hidden");
   modal.classList.add("active");
+  modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
 
   updateAuthModalText();
@@ -283,6 +291,7 @@ function openAuthModal(mode = "login") {
     emailInput.focus();
   }
 }
+
 
 function closeAuthModal() {
   const modal = getElement("authModal");
