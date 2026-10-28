@@ -1,1 +1,293 @@
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>B Pharma Pathshala | Pharmacy Study Material</title>
+
+    <meta name="description" content="B.Pharm और D.Pharm छात्रों के लिए सेमेस्टर-वाइज नोट्स, PDF और उपयोगी शैक्षणिक संसाधन।">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase JavaScript Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Website JavaScript -->
+    <script defer src="app.js"></script>
+</head>
+
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="navbar">
+        <a class="logo" href="#home">📘 B Pharma Pathshala</a>
+
+        <nav>
+            <a href="#home">होम</a>
+            <a href="#notes">नोट्स</a>
+            <a href="#store">स्टोर</a>
+            <a href="#about">हमारे बारे में</a>
+        </nav>
+
+        <div class="account">
+            <button id="loginBtn" class="btn-primary">
+                लॉगिन / साइन अप
+            </button>
+
+            <div id="userProfile" class="hidden">
+                <span id="userEmailDisplay"></span>
+                <button id="logoutBtn" class="btn-outline">
+                    लॉगआउट
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Home Section -->
+        <section id="home" class="hero">
+            <p class="eyebrow">B.Pharm • D.Pharm • AKTU / PCI</p>
+
+            <h1>फार्मेसी सीखें आसान भाषा में!</h1>
+
+            <p>
+                सेमेस्टर-वाइज नोट्स, PDF और उपयोगी शैक्षणिक
+                संसाधन एक ही जगह।
+            </p>
+
+            <a href="#notes" class="btn-light">नोट्स देखें</a>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="container">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">STUDY MATERIAL</p>
+                    <h2>नोट्स और PDF</h2>
+                </div>
+
+                <span id="notesCount" class="muted"></span>
+            </div>
+
+            <div class="filters">
+                <select id="courseFilter">
+                    <option value="">सभी कोर्स</option>
+                    <option value="B.Pharm">B.Pharm</option>
+                    <option value="D.Pharm">D.Pharm</option>
+                </select>
+
+                <select id="semesterFilter">
+                    <option value="">सभी सेमेस्टर</option>
+                    <option value="1st Semester">1st Semester</option>
+                    <option value="2nd Semester">2nd Semester</option>
+                    <option value="3rd Semester">3rd Semester</option>
+                    <option value="4th Semester">4th Semester</option>
+                    <option value="5th Semester">5th Semester</option>
+                    <option value="6th Semester">6th Semester</option>
+                    <option value="7th Semester">7th Semester</option>
+                    <option value="8th Semester">8th Semester</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                </select>
+
+                <input
+                    id="noteSearch"
+                    type="search"
+                    placeholder="विषय या नोट्स खोजें..."
+                    aria-label="नोट्स खोजें"
+                >
+            </div>
+
+            <div id="notesContainer" class="grid-container">
+                <p class="muted">नोट्स लोड हो रहे हैं...</p>
+            </div>
+        </section>
+
+        <!-- Product Store -->
+        <section id="store" class="container">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">STUDENT STORE</p>
+                    <h2>उपयोगी उत्पाद</h2>
+                </div>
+            </div>
+
+            <div id="productContainer" class="grid-container">
+                <p class="muted">उत्पाद लोड हो रहे हैं...</p>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="adminDashboard" class="container admin-panel hidden">
+
+            <p class="eyebrow">ADMIN ONLY</p>
+            <h2>एडमिन डैशबोर्ड</h2>
+
+            <p class="muted">
+                यहाँ अधिकृत एडमिन नोट्स PDF और उत्पादों की
+                इमेज अपलोड कर सकता है।
+            </p>
+
+            <form id="adminForm" class="admin-form">
+
+                <label for="adminType">कंटेंट का प्रकार</label>
+                <select id="adminType">
+                    <option value="note">नोट्स PDF</option>
+                    <option value="product">उत्पाद इमेज</option>
+                </select>
+
+                <label for="adminTitle">शीर्षक / उत्पाद का नाम</label>
+                <input
+                    id="adminTitle"
+                    type="text"
+                    maxlength="150"
+                    required
+                    placeholder="नाम लिखें"
+                >
+
+                <div id="noteFields" class="form-grid">
+
+                    <div>
+                        <label for="adminCourse">कोर्स</label>
+                        <select id="adminCourse">
+                            <option value="B.Pharm">B.Pharm</option>
+                            <option value="D.Pharm">D.Pharm</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="adminSemester">सेमेस्टर / वर्ष</label>
+                        <select id="adminSemester">
+                            <option>1st Semester</option>
+                            <option>2nd Semester</option>
+                            <option>3rd Semester</option>
+                            <option>4th Semester</option>
+                            <option>5th Semester</option>
+                            <option>6th Semester</option>
+                            <option>7th Semester</option>
+                            <option>8th Semester</option>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="adminSubject">विषय</label>
+                        <input
+                            id="adminSubject"
+                            type="text"
+                            value="General"
+                            placeholder="विषय का नाम"
+                        >
+                    </div>
+
+                </div>
+
+                <div id="priceField" class="hidden">
+                    <label for="adminPrice">मूल्य (₹)</label>
+                    <input
+                        id="adminPrice"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value="100"
+                    >
+                </div>
+
+                <label for="adminFile">फाइल चुनें</label>
+                <input id="adminFile" type="file" required>
+
+                <button class="btn-primary" type="submit">
+                    अपलोड करें
+                </button>
+
+                <p id="adminMessage" class="muted" role="status"></p>
+
+            </form>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container about">
+            <h2>B Pharma Pathshala के बारे में</h2>
+
+            <p>
+                B Pharma Pathshala, B.Pharm और D.Pharm छात्रों
+                के लिए अध्ययन सामग्री, सेमेस्टर-वाइज नोट्स,
+                PDF और उपयोगी शैक्षणिक संसाधन उपलब्ध कराने
+                का प्लेटफ़ॉर्म है।
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            © <span id="year"></span> B Pharma Pathshala.
+            All rights reserved.
+        </p>
+    </footer>
+
+    <!-- Login / Signup Modal -->
+    <div id="authModal" class="modal hidden" role="dialog" aria-modal="true">
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                class="close"
+                aria-label="बंद करें"
+            >
+                ×
+            </button>
+
+            <h2 id="modalTitle">लॉगिन करें</h2>
+
+            <p class="muted">
+                अपने ईमेल और पासवर्ड से लॉगिन करें।
+            </p>
+
+            <form id="authForm">
+
+                <label for="authEmail">ईमेल</label>
+                <input
+                    id="authEmail"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    placeholder="अपना ईमेल लिखें"
+                >
+
+                <label for="authPassword">पासवर्ड</label>
+                <input
+                    id="authPassword"
+                    type="password"
+                    autocomplete="current-password"
+                    minlength="6"
+                    required
+                    placeholder="कम से कम 6 अक्षर"
+                >
+
+                <button id="authSubmitBtn" class="btn-primary" type="submit">
+                    लॉगिन
+                </button>
+
+            </form>
+
+            <button id="toggleAuthMode" class="text-button" type="button">
+                खाता नहीं है? साइन अप करें
+            </button>
+
+            <p id="authMessage" class="muted" role="status"></p>
+
+        </div>
+    </div>
+
+</body>
+</html>
+
