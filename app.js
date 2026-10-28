@@ -292,14 +292,12 @@ function openAuthModal(mode = "login") {
   }
 }
 
-
 function closeAuthModal() {
-  const modal = getElement("authModal");
-  if (!modal) return;
-
-  modal.classList.remove("active");
-  modal.setAttribute("aria-hidden", "true");
+    const modal = document.getElementById("authModal");
+    modal.classList.remove("active");
+    modal.style.display = "none";
 }
+
 
 function switchAuthMode() {
   authMode = authMode === "login" ? "signup" : "login";
