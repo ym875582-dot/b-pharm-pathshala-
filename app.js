@@ -921,6 +921,24 @@ async function saveProductRecord(imageUrl) {
 
   if (error) throw error;
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const closeBtn = document.querySelector(
+        "#authModal .close-btn, #authModal .close, #authModal .modal-close"
+    );
 
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeAuthModal);
+    }
+
+    const modal = document.getElementById("authModal");
+
+    if (modal) {
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeAuthModal();
+            }
+        });
+    }
+});
 // ---------------- END OF APP.JS ----------------
 
