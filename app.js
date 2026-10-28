@@ -15,8 +15,8 @@
 
 // ---------------- SUPABASE CONFIGURATION ----------------
 
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY";
+const SUPABASE_URL = "https://hlxjpygpdygesjdhgclt.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_c4eNSZUdO5nAC5rDKlccMw_JSPEzzXQ";
 
 const NOTES_BUCKET = "notes-pdf";
 const PRODUCTS_BUCKET = "product-images";
